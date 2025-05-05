@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card shadow">
+    <div class="card-header bg-primary text-white">
+        <h2 class="mb-0">Mani Uzdevumi</h2>
+    </div>
+    
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Uzdevums</th>
+                        <th>Termiņš</th>
+                        <th>Prioritāte</th>
+                        <th>Darbības</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in tasks %}
+                    <tr>
+                        <td>{{ task['name'] }}</td>
+                        <td>{{ task['due_date'] }}</td>
+                        <td>
+                            <span class="badge 
+                                {% if task['priority'] == 'Extreme' %}bg-danger
+                                {% elif task['priority'] == 'High' %}bg-warning
+                                {% elif task['priority'] == 'Medium' %}bg-info
+                                {% else %}bg-secondary{% endif %}">
+                                {{ task['priority'] }}
+                            </span>
+                        </td>
+                        <td>
+                            <a href="{{ url_for('manage', task_id=task['id']) }}" 
+                               class="btn btn-sm btn-outline-primary">
+                                ✏️ Rediģēt
+                            </a>
+                            <a href="{{ url_for('delete', task_id=task['id']) }}" 
+                               class="btn btn-sm btn-outline-danger">
+                                🗑️ Dzēst
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

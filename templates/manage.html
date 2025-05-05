@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card shadow">
+    <div class="card-header bg-info text-white">
+        <h2 class="mb-0">
+            {% if task %}Rediģēt uzdevumu{% else %}Pievienot uzdevumu{% endif %}
+            <a href="{{ url_for('index') }}" class="btn btn-light btn-sm float-end">← Atpakaļ</a>
+        </h2>
+    </div>
+
+    <div class="card-body">
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label">Nosaukums</label>
+                <input type="text" class="form-control" name="name" 
+                    value="{{ task['name'] if task else '' }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Termiņš</label>
+                <input type="date" class="form-control" name="due_date" 
+                    value="{{ task['due_date'] if task else '' }}" required>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label">Prioritāte</label>
+                <select class="form-select" name="priority" required>
+                    <option value="Extreme" {% if task and task['priority'] == 'Extreme' %}selected{% endif %}>
+                        Extreme
+                    </option>
+                    <option value="High" {% if task and task['priority'] == 'High' %}selected{% endif %}>
+                        High
+                    </option>
+                    <option value="Medium" {% if task and task['priority'] == 'Medium' %}selected{% endif %}>
+                        Medium
+                    </option>
+                    <option value="Low" {% if task and task['priority'] == 'Low' %}selected{% endif %}>
+                        Low
+                    </option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">
+                {% if task %}Rediģēt uzdevumu{% else %}Izveidot uzdevumu{% endif %}
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

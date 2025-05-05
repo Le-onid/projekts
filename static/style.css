@@ -1,0 +1,32 @@
+body {
+    background: #f8f9fa;
+}
+
+.container {
+    max-width: 800px;
+}
+
+.card {
+    border-radius: 15px;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.05);
+}
+
+.badge {
+    font-size: 0.9em;
+    padding: 0.5em 0.75em;
+}
+
+.btn {
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    transform: translateY(-1px);
+}
+
+.btn-outline-danger:hover {
+    transform: translateY(-1px);
+}
